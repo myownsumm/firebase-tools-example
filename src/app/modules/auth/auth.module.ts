@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { authReducer } from './store/auth.reducer';
 import { AuthEffectsService } from './store/auth.effects';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
     imports: [
@@ -23,7 +24,8 @@ import { AuthEffectsService } from './store/auth.effects';
         ReactiveFormsModule
     ],
     declarations: [
-        LoginComponent
+        LoginComponent,
+        RegisterComponent
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
