@@ -40,10 +40,14 @@ export class RegisterComponent implements OnInit {
     register() {
         if (!this.registerForm.valid) {
             this.notificationsService.error('Please fill form with valid data.');
+
+            return;
         }
 
         if (this.registerForm.value.password !== this.registerForm.value.password_confirmation) {
             this.notificationsService.error('Password confirmation is not equal to password.');
+
+            return;
         }
 
         return this.store.dispatch(new RegisterAttemptAction({
