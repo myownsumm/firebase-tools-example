@@ -4,3 +4,9 @@
 body {
     font-family: Roboto, sans-serif;
 }
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

@@ -1,1 +1,21 @@
-register
+<div class="register-container">
+    <mat-card>
+        <mat-card-title>Register</mat-card-title>
+        <mat-card-content>
+            <form class="register-form" [formGroup]="registerForm" (ngSubmit)="register()">
+                <mat-form-field>
+                    <input matInput type="email" formControlName="email" placeholder="Email" tabindex="1">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input type="password" formControlName="password" matInput placeholder="Password" tabindex="2">
+                </mat-form-field>
+
+                <div class="action-buttons">
+                    <button mat-raised-button type="submit" color="primary">CREATE ACCOUNT</button>
+                    <button mat-raised-button color="accent" (click)="goToLogin()">LOGIN WITH EXISTING ACCOUNT</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

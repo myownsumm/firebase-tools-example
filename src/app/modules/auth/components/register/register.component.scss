@@ -1,0 +1,16 @@
+.register-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  mat-card {
+    width: 500px;
+    margin-top: 40px;
+    align-self: center;
+  }
+
+  .register-form {
+    display: flex;
+    flex-direction: column;;
+  }
+}
