@@ -11,6 +11,11 @@
                     <input type="password" formControlName="password" matInput placeholder="Password" tabindex="2">
                 </mat-form-field>
 
+                <mat-form-field>
+                    <input type="password" formControlName="password_confirmation" matInput
+                           placeholder="Password Confirmation" tabindex="2">
+                </mat-form-field>
+
                 <div class="action-buttons">
                     <button mat-raised-button type="submit" color="primary">CREATE ACCOUNT</button>
                     <button mat-raised-button color="accent" (click)="goToLogin()">LOGIN WITH EXISTING ACCOUNT</button>

@@ -9,8 +9,18 @@ export const LOG_OUT_ACTION = '[auth] LOG_OUT_ACTION';
 export const SUCCESS_LOGGED_IN_ACTION = '[auth] SUCCESS_LOGGED_IN_ACTION';
 export const USER_ALREADY_AUTHENTICATED_ACTION = '[auth] USER_ALREADY_AUTHENTICATED_ACTION';
 
+export const REGISTER_ATTEMPT_ACTION = '[auth] REGISTER_ATTEMPT_ACTION';
+
 export class LogInAttemptAction implements Action {
     readonly type = LOG_IN_ATTEMPT_ACTION;
+
+    constructor(public payload: { email: string, password: string }) {
+
+    }
+}
+
+export class RegisterAttemptAction implements Action {
+    readonly type = REGISTER_ATTEMPT_ACTION;
 
     constructor(public payload: { email: string, password: string }) {
 
