@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
 
 
-    constructor(private fb: FormBuilder, protected store: Store<IAuthState>) {
+    constructor(private fb: FormBuilder, protected store: Store<IAuthState>, protected router: Router) {
     }
 
     ngOnInit() {
@@ -41,7 +41,9 @@ export class LoginComponent implements OnInit {
         const password = this.loginForm.get('password').value;
 
         this.store.dispatch(new LogInAttemptAction({email, password}));
+    }
 
-        // this.loginForm.reset();
+    goToRegister() {
+        return this.router.navigate(['/auth', 'register']);
     }
 }
