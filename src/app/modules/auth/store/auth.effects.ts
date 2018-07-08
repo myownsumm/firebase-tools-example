@@ -10,7 +10,9 @@ import { IAuthState } from './auth.reducer';
 import { Store } from '@ngrx/store';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/internal/Observable';
-import { mergeMap } from 'rxjs/operators';
+import { NotificationsService } from 'angular2-notifications';
+import { of } from 'rxjs/internal/observable/of';
+import { catchError, concatMap } from 'rxjs/operators';
 
 
 @Injectable()
@@ -19,6 +21,7 @@ export class AuthEffectsService {
     constructor(protected actions$: Actions,
                 protected store: Store<IAuthState>,
                 protected afAuth: AngularFireAuth,
+                protected notificationsService: NotificationsService,
                 protected router: Router) {
     }
 
@@ -26,10 +29,17 @@ export class AuthEffectsService {
     @Effect({dispatch: false})
     loginAttempt$: Observable<any> = this.actions$.pipe(
         ofType<LogInAttemptAction>(LOG_IN_ATTEMPT_ACTION),
-        mergeMap(async action => {
+
+        concatMap(async action => {
             const userCreds = await this.afAuth.auth.signInWithEmailAndPassword(action.payload.email, action.payload.password);
 
+            // todo dispatch user logged in action
+        }),
 
+        catchError((err, caught) => {
+            this.notificationsService.error(err.message);
+
+            return caught;
         })
     );
     // .ofType<LogInAttemptAction>(LOG_IN_ATTEMPT_ACTION)
