@@ -14,6 +14,8 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+
 
 @NgModule({
     declarations: [
@@ -32,7 +34,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
 
-        RouterModule.forRoot(routes, {useHash: true})
+        RouterModule.forRoot(routes, {useHash: true}),
+        SimpleNotificationsModule.forRoot()
     ],
     providers: [],
     bootstrap: [AppComponent],
