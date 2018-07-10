@@ -4,7 +4,7 @@
         <span class="spacer-to-right"></span>
         {{ (authUser$ | async)?.email || 'Not authenticated' }}
 
-        <button *ngIf="authUser$ | async" mat-button>Log Out</button>
+        <button *ngIf="authUser$ | async" (click)="logout()" mat-button>Log Out</button>
     </mat-toolbar-row>
 </mat-toolbar>
 

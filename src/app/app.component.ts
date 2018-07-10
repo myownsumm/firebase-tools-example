@@ -4,6 +4,7 @@ import { IAuthState } from './modules/auth/store/auth.reducer';
 import { Observable } from 'rxjs/internal/Observable';
 import { IAuthUser } from '../typings';
 import { selectAuthUser } from './modules/auth/store/auth.selectors';
+import { LogOutAction } from './modules/auth/store/auth.actions';
 
 @Component({
     selector: 'app-root',
@@ -17,5 +18,9 @@ export class AppComponent {
         this.authUser$ = store.pipe(
             select(selectAuthUser)
         );
+    }
+
+    logout() {
+        return this.store.dispatch(new LogOutAction());
     }
 }

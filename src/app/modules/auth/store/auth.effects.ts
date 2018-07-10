@@ -2,7 +2,12 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import {
-    LOG_IN_ATTEMPT_ACTION, LogInAttemptAction, LogInSuccessAction, REGISTER_ATTEMPT_ACTION, RegisterAttemptAction
+    LOG_IN_ATTEMPT_ACTION, LOG_OUT_ACTION,
+    LogInAttemptAction,
+    LogInSuccessAction,
+    LogOutAction,
+    REGISTER_ATTEMPT_ACTION,
+    RegisterAttemptAction
 } from './auth.actions';
 import { Router } from '@angular/router';
 import { IAuthState } from './auth.reducer';
@@ -25,7 +30,7 @@ export class AuthEffectsService {
 
 
     @Effect()
-    loginAttempt$: Observable<void | Action> = this.actions$.pipe(
+    loginAttempt$: Observable<Action> = this.actions$.pipe(
         ofType<LogInAttemptAction>(LOG_IN_ATTEMPT_ACTION),
 
         mergeMap(async action => {
@@ -42,13 +47,28 @@ export class AuthEffectsService {
     );
 
     @Effect()
-    registerAttempt$: Observable<void | Action> = this.actions$.pipe(
+    registerAttempt$: Observable<Action> = this.actions$.pipe(
         ofType<RegisterAttemptAction>(REGISTER_ATTEMPT_ACTION),
 
         mergeMap(async action => {
             const userCreds = await this.afAuth.auth.createUserWithEmailAndPassword(action.payload.email, action.payload.password);
 
             return new LogInSuccessAction({email: userCreds.user.email});
+        }),
+
+        catchError((err, caught) => {
+            this.notificationsService.error(err.message);
+
+            return caught;
+        })
+    );
+
+    @Effect({dispatch: false})
+    logout$: Observable<void> = this.actions$.pipe(
+        ofType<LogOutAction>(LOG_OUT_ACTION),
+
+        mergeMap(action => {
+            return this.afAuth.auth.signOut();
         }),
 
         catchError((err, caught) => {

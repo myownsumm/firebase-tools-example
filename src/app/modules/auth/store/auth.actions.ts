@@ -1,11 +1,11 @@
 import { Action } from '@ngrx/store';
 
-import * as firebase from 'firebase/app';
 import { IAuthUser } from '../../../../typings';
 
 export const LOG_IN_ATTEMPT_ACTION = '[auth] LOG_IN_ATTEMPT_ACTION';
 export const REGISTER_ATTEMPT_ACTION = '[auth] REGISTER_ATTEMPT_ACTION';
 export const LOG_IN_SUCCESS_ACTION = '[auth] LOG_IN_SUCCESS_ACTION';
+export const LOG_OUT_ACTION = '[auth] LOG_OUT_ACTION';
 
 export class LogInAttemptAction implements Action {
     readonly type = LOG_IN_ATTEMPT_ACTION;
@@ -31,3 +31,10 @@ export class LogInSuccessAction implements Action {
     }
 }
 
+export class LogOutAction implements Action {
+    readonly type = LOG_OUT_ACTION;
+
+    constructor() {
+
+    }
+}
