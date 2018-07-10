@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import {
-    LOG_IN_ATTEMPT_ACTION, LogInAttemptAction, REGISTER_ATTEMPT_ACTION, RegisterAttemptAction
+    LOG_IN_ATTEMPT_ACTION, LogInAttemptAction, LogInSuccessAction, REGISTER_ATTEMPT_ACTION, RegisterAttemptAction
 } from './auth.actions';
 import { Router } from '@angular/router';
 import { IAuthState } from './auth.reducer';
@@ -24,14 +24,14 @@ export class AuthEffectsService {
     }
 
 
-    @Effect({dispatch: false})
+    @Effect()
     loginAttempt$: Observable<void | Action> = this.actions$.pipe(
         ofType<LogInAttemptAction>(LOG_IN_ATTEMPT_ACTION),
 
         mergeMap(async action => {
             const userCreds = await this.afAuth.auth.signInWithEmailAndPassword(action.payload.email, action.payload.password);
 
-            console.log('userCreds', userCreds);
+            return new LogInSuccessAction({email: userCreds.user.email});
         }),
 
         catchError((err, caught) => {
@@ -41,14 +41,14 @@ export class AuthEffectsService {
         })
     );
 
-    @Effect({dispatch: false})
+    @Effect()
     registerAttempt$: Observable<void | Action> = this.actions$.pipe(
         ofType<RegisterAttemptAction>(REGISTER_ATTEMPT_ACTION),
 
         mergeMap(async action => {
             const userCreds = await this.afAuth.auth.createUserWithEmailAndPassword(action.payload.email, action.payload.password);
 
-            console.log('userCreds', userCreds);
+            return new LogInSuccessAction({email: userCreds.user.email});
         }),
 
         catchError((err, caught) => {
