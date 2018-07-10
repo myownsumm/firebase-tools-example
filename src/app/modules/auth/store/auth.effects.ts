@@ -31,7 +31,7 @@ export class AuthEffectsService {
         mergeMap(async action => {
             const userCreds = await this.afAuth.auth.signInWithEmailAndPassword(action.payload.email, action.payload.password);
 
-            // todo dispatch user logged in action
+            console.log('userCreds', userCreds);
         }),
 
         catchError((err, caught) => {
@@ -41,7 +41,7 @@ export class AuthEffectsService {
         })
     );
 
-    @Effect()
+    @Effect({dispatch: false})
     registerAttempt$: Observable<void | Action> = this.actions$.pipe(
         ofType<RegisterAttemptAction>(REGISTER_ATTEMPT_ACTION),
 
