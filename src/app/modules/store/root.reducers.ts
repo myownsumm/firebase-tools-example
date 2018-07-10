@@ -4,11 +4,13 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { RouterStateSnapshot } from '@angular/router';
 import { IAuthState } from '../auth/store/auth.reducer';
 import { environment } from '../../../environments/environment';
+import { IChatState } from '../chat/store/chat.reducer';
 
 
 export interface IAppState {
     routerReducer: fromRouter.RouterReducerState<RouterStateSnapshot>;
-    auth?: IAuthState
+    auth?: IAuthState,
+    chat?: IChatState,
 }
 
 export const metaReducers: MetaReducer<IAppState>[] = !environment.production ? [storeFreeze] : [];
