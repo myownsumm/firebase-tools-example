@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { RoomsComponent } from './components/room/rooms.component';
 
 export const chatRoutes: Routes = [
     {
@@ -6,7 +7,7 @@ export const chatRoutes: Routes = [
         children: [
             {
                 path: 'rooms',
-                component: undefined // todo
+                component: RoomsComponent
             }
         ]
     }

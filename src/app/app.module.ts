@@ -15,6 +15,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { ChatModule } from './modules/chat/chat.module';
 
 
 @NgModule({
@@ -23,7 +24,6 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     ],
     imports: [
         BrowserModule,
-        AuthModule,
         MaterialModule,
 
         StoreModule.forRoot(reducers, {metaReducers}),
@@ -35,7 +35,10 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
         AngularFireAuthModule,
 
         RouterModule.forRoot(routes, {useHash: true}),
-        SimpleNotificationsModule.forRoot()
+        SimpleNotificationsModule.forRoot(),
+
+        AuthModule,
+        ChatModule
     ],
     providers: [],
     bootstrap: [AppComponent],

@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-chat-rooms',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+    templateUrl: './rooms.component.html',
+    styleUrls: ['./rooms.component.scss']
 })
 export class RoomsComponent implements OnInit {
     ngOnInit() {
