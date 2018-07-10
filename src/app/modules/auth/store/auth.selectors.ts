@@ -1,9 +1,10 @@
 import { IAuthState } from './auth.reducer';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
+import { IAppState } from '../../store/root.reducers';
 
-export const selectAuthFeature = createFeatureSelector<IAuthState>('auth');
+export const selectAuthFeature = (state: IAppState) => state.auth;
 
-export const selectAuthFirebaseUser = createSelector(
+export const selectAuthUser = createSelector(
     selectAuthFeature,
-    (state: IAuthState) => state.firebaseUser
+    (state: IAuthState) => state.authUser
 );

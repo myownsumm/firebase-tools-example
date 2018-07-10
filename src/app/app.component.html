@@ -1,3 +1,12 @@
-<mat-toolbar>Firebase Tools Example</mat-toolbar>
+<mat-toolbar>
+    <mat-toolbar-row>
+        Firebase Tools Example
+        <span class="spacer-to-right"></span>
+        {{ (authUser$ | async)?.email || 'Not authenticated' }}
+
+        <button *ngIf="authUser$ | async" mat-button>Log Out</button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
 <router-outlet></router-outlet>
 <simple-notifications></simple-notifications>
