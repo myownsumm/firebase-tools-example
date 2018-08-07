@@ -36,7 +36,7 @@ import { ChatModule } from './modules/chat/chat.module';
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
 
-        RouterModule.forRoot(routes, {useHash: true}),
+        RouterModule.forRoot(routes, {useHash: false}),
         SimpleNotificationsModule.forRoot(),
 
         AuthModule,

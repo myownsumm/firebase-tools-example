@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import {
+    CHECK_IF_USER_AUTHED_ACTION,
+    CheckIfUserAuthedAction,
     LOG_IN_ATTEMPT_ACTION, LOG_IN_SUCCESS_ACTION, LOG_OUT_ACTION,
     LogInAttemptAction,
     LogInSuccessAction,
@@ -15,7 +17,8 @@ import { Action, Store } from '@ngrx/store';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/internal/Observable';
 import { NotificationsService } from 'angular2-notifications';
-import { catchError, concatMap, mergeMap } from 'rxjs/operators';
+import { catchError, mergeMap, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 
 @Injectable()
@@ -84,6 +87,29 @@ export class AuthEffectsService {
 
         mergeMap(action => {
             return this.router.navigate(['/']);
+        }),
+
+        catchError((err, caught) => {
+            this.notificationsService.error(err.message);
+
+            return caught;
+        })
+    );
+
+    @Effect()
+    checkIfUserAuthed$: Observable<any> = this.actions$.pipe(
+        ofType<CheckIfUserAuthedAction>(CHECK_IF_USER_AUTHED_ACTION),
+
+        switchMap(() => {
+            return this.afAuth.authState.pipe(
+                switchMap((currentFirebaseUser) => {
+                    if (currentFirebaseUser && currentFirebaseUser.email) {
+                        return of(new LogInSuccessAction({email: currentFirebaseUser.email}));
+                    }
+
+                    return of(new NeedToLogInAction());
+                })
+            );
         }),
 
         catchError((err, caught) => {

@@ -6,8 +6,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { IAuthUser } from '../../../../typings';
 import { selectAuthUser } from '../store/auth.selectors';
-import { mergeMap, switchMap } from 'rxjs/operators';
-import { NeedToLogInAction } from '../store/auth.actions';
+import { switchMap } from 'rxjs/operators';
+import { CheckIfUserAuthedAction } from '../store/auth.actions';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -22,10 +22,10 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
         const authUser$ = this.authUser$
             .pipe(
-                switchMap((authUser) => {
-                    !authUser && this.store.dispatch(new NeedToLogInAction());
+                switchMap((stateAuthUser) => {
+                    !stateAuthUser && this.store.dispatch(new CheckIfUserAuthedAction());
 
-                    return of(!!authUser);
+                    return of(!!stateAuthUser);
                 })
             );
 
