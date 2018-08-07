@@ -27,7 +27,9 @@ import { ChatModule } from './modules/chat/chat.module';
         MaterialModule,
 
         StoreModule.forRoot(reducers, {metaReducers}),
+
         StoreRouterConnectingModule,
+
         !environment.production ? StoreDevtoolsModule.instrument() : [],
         EffectsModule.forRoot([]),
 
