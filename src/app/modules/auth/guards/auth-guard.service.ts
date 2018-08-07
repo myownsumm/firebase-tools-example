@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { IAuthUser } from '../../../../typings';
 import { selectAuthUser } from '../store/auth.selectors';
-import { concatMap, mergeMap, switchMap } from 'rxjs/operators';
+import { mergeMap, switchMap } from 'rxjs/operators';
 import { NeedToLogInAction } from '../store/auth.actions';
 
 @Injectable()
@@ -22,12 +22,15 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
         const authUser$ = this.authUser$
             .pipe(
-                mergeMap((authUser) => {
+                switchMap((authUser) => {
                     !authUser && this.store.dispatch(new NeedToLogInAction());
 
                     return of(!!authUser);
                 })
             );
+
+        // sets boolean observable to hot mode. find better solution?
+        authUser$.subscribe();
 
         return authUser$;
     }
