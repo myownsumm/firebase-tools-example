@@ -8,6 +8,11 @@ export const chatRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             {
+                path: '',
+                redirectTo: 'rooms',
+                pathMatch: 'full'
+            },
+            {
                 path: 'rooms',
                 component: RoomsComponent
             }

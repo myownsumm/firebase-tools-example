@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import {
-    LOG_IN_ATTEMPT_ACTION, LOG_OUT_ACTION,
+    LOG_IN_ATTEMPT_ACTION, LOG_IN_SUCCESS_ACTION, LOG_OUT_ACTION,
     LogInAttemptAction,
     LogInSuccessAction,
     LogOutAction,
@@ -69,6 +69,21 @@ export class AuthEffectsService {
 
         mergeMap(action => {
             return this.afAuth.auth.signOut();
+        }),
+
+        catchError((err, caught) => {
+            this.notificationsService.error(err.message);
+
+            return caught;
+        })
+    );
+
+    @Effect({dispatch: false})
+    loginSuccess$: Observable<boolean> = this.actions$.pipe(
+        ofType<LogInSuccessAction>(LOG_IN_SUCCESS_ACTION),
+
+        mergeMap(action => {
+            return this.router.navigate(['/']);
         }),
 
         catchError((err, caught) => {
