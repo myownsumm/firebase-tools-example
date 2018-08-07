@@ -7,6 +7,8 @@ export const REGISTER_ATTEMPT_ACTION = '[auth] REGISTER_ATTEMPT_ACTION';
 export const LOG_IN_SUCCESS_ACTION = '[auth] LOG_IN_SUCCESS_ACTION';
 export const LOG_OUT_ACTION = '[auth] LOG_OUT_ACTION';
 
+export const NEED_TO_LOG_IN_ACTION = '[auth] NEED_TO_LOG_IN_ACTION';
+
 export class LogInAttemptAction implements Action {
     readonly type = LOG_IN_ATTEMPT_ACTION;
 
@@ -33,6 +35,14 @@ export class LogInSuccessAction implements Action {
 
 export class LogOutAction implements Action {
     readonly type = LOG_OUT_ACTION;
+
+    constructor() {
+
+    }
+}
+
+export class NeedToLogInAction implements Action {
+    readonly type = NEED_TO_LOG_IN_ACTION;
 
     constructor() {
 

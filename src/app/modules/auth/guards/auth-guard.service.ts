@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { IAuthUser } from '../../../../typings';
 import { selectAuthUser } from '../store/auth.selectors';
+import { concatMap, mergeMap, switchMap } from 'rxjs/operators';
+import { NeedToLogInAction } from '../store/auth.actions';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -14,17 +16,19 @@ export class AuthGuard implements CanActivate {
     constructor(private store: Store<IAuthState>, protected router: Router) {
         this.authUser$ = store.pipe(
             select(selectAuthUser)
-        )
+        );
     }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-        this.authUser$.subscribe(user => {
-            console.log(user);
-        });
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
+        const authUser$ = this.authUser$
+            .pipe(
+                mergeMap((authUser) => {
+                    !authUser && this.store.dispatch(new NeedToLogInAction());
 
+                    return of(!!authUser);
+                })
+            );
 
-        // this.router.navigate(['/auth', 'login']);
-
-        return of(false);
+        return authUser$;
     }
 }

@@ -5,7 +5,7 @@ import {
     LOG_IN_ATTEMPT_ACTION, LOG_IN_SUCCESS_ACTION, LOG_OUT_ACTION,
     LogInAttemptAction,
     LogInSuccessAction,
-    LogOutAction,
+    LogOutAction, NEED_TO_LOG_IN_ACTION, NeedToLogInAction,
     REGISTER_ATTEMPT_ACTION,
     RegisterAttemptAction
 } from './auth.actions';
@@ -84,6 +84,21 @@ export class AuthEffectsService {
 
         mergeMap(action => {
             return this.router.navigate(['/']);
+        }),
+
+        catchError((err, caught) => {
+            this.notificationsService.error(err.message);
+
+            return caught;
+        })
+    );
+
+    @Effect({dispatch: false})
+    needToLogIn$: Observable<boolean> = this.actions$.pipe(
+        ofType<NeedToLogInAction>(NEED_TO_LOG_IN_ACTION),
+
+        mergeMap(action => {
+            return this.router.navigate(['/auth', 'login']);
         }),
 
         catchError((err, caught) => {
