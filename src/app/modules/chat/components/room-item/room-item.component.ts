@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 
 @Component({
-    selector: 'app-chat-room',
+    selector: 'app-chat-room-item',
     templateUrl: './room-item.component.html',
     styleUrls: ['./room-item.component.scss']
 })
