@@ -9,7 +9,7 @@ import { chatRoutes } from './chat.routing';
 import { RoomsListComponent } from './components/rooms-list/rooms-list.component';
 import { ChatEffectsService } from './store/chat.effects';
 import { chatReducer } from './store/chat.reducer';
-import { RoomComponent } from './components/room/room.component';
+import { RoomItemComponent } from './components/room-item/room-item.component';
 
 @NgModule({
     imports: [
@@ -25,7 +25,7 @@ import { RoomComponent } from './components/room/room.component';
     ],
     declarations: [
         RoomsListComponent,
-        RoomComponent
+        RoomItemComponent
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
