@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
-import { RoomsComponent } from './components/room/rooms.component';
+import { RoomsListComponent } from './components/rooms-list/rooms-list.component';
 import { AuthGuard } from '../auth/guards/auth-guard.service';
 
 export const chatRoutes: Routes = [
     {
         path: 'chat',
+        canActivate: [AuthGuard],
         children: [
             {
                 path: '',
@@ -13,8 +14,7 @@ export const chatRoutes: Routes = [
             },
             {
                 path: 'rooms',
-                component: RoomsComponent,
-                canActivate: [AuthGuard]
+                component: RoomsListComponent
             }
         ]
     }

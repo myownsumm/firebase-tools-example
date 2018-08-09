@@ -6,9 +6,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { chatRoutes } from './chat.routing';
-import { RoomsComponent } from './components/room/rooms.component';
+import { RoomsListComponent } from './components/rooms-list/rooms-list.component';
 import { ChatEffectsService } from './store/chat.effects';
 import { chatReducer } from './store/chat.reducer';
+import { RoomComponent } from './components/room/room.component';
 
 @NgModule({
     imports: [
@@ -23,7 +24,8 @@ import { chatReducer } from './store/chat.reducer';
         ReactiveFormsModule
     ],
     declarations: [
-        RoomsComponent
+        RoomsListComponent,
+        RoomComponent
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
