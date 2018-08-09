@@ -10,6 +10,7 @@ import { RoomsListComponent } from './components/rooms-list/rooms-list.component
 import { ChatEffectsService } from './store/chat.effects';
 import { chatReducer } from './store/chat.reducer';
 import { RoomItemComponent } from './components/room-item/room-item.component';
+import { RoomsService } from './services/rooms.service';
 
 @NgModule({
     imports: [
@@ -30,7 +31,9 @@ import { RoomItemComponent } from './components/room-item/room-item.component';
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
     ],
-    providers: []
+    providers: [
+        RoomsService
+    ]
 })
 export class ChatModule {
 }
