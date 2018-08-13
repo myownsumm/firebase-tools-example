@@ -12,4 +12,8 @@ export class RoomItemComponent implements OnInit {
 
     ngOnInit() {
     }
+
+    enter() {
+        console.log(this.room);
+    }
 }

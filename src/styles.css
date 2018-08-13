@@ -14,3 +14,13 @@ body {
 .spacer-to-right {
     flex: 1 1 auto;
 }
+
+.app-link {
+    color: #3f51b5;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.app-link:hover {
+    text-decoration: underline;
+}

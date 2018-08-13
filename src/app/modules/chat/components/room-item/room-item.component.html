@@ -1,7 +1,10 @@
 <mat-list-item>
     <mat-icon mat-list-icon>folder</mat-icon>
-    <h4 mat-line>{{ room.name }}</h4>
-    <p mat-line> some date line </p>
+    <h2 mat-line>{{ room.name }}</h2>
+    <h4 mat-line> People: 0</h4>
+    <div mat-line>
+        <a class="app-link" (click)="enter()">Enter</a>
+    </div>
 </mat-list-item>
 
 <mat-divider></mat-divider>
