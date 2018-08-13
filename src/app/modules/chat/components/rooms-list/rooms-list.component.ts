@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { IChatState } from '../../store/chat.reducer';
-import { FetchRoomsList } from '../../store/chat.actions';
+import { CreateNewRoomAction, FetchRoomsList } from '../../store/chat.actions';
 import { Observable } from 'rxjs';
 import { IRoom } from '../../../../../typings';
 import { selectAvailableRooms } from '../../store/chat.selectors';
@@ -34,8 +34,14 @@ export class RoomsListComponent implements OnInit {
             width: '450px'
         });
 
-        dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed', result);
+        dialogRef.afterClosed().subscribe(name => {
+            if (!name) {
+                return;
+            }
+
+            this.store.dispatch(
+                new CreateNewRoomAction({name})
+            );
         });
     }
 }
