@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { MaterialModule } from '../material/material.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { chatRoutes } from './chat.routing';
 import { RoomsListComponent } from './components/rooms-list/rooms-list.component';
 import { ChatEffectsService } from './store/chat.effects';
@@ -12,6 +12,7 @@ import { chatReducer } from './store/chat.reducer';
 import { RoomItemComponent } from './components/room-item/room-item.component';
 import { RoomsService } from './services/rooms.service';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { CreateRoomDialogComponent } from './components/create-room/create-room-dialog.component';
 
 @NgModule({
     imports: [
@@ -23,11 +24,14 @@ import { AngularFirestore } from 'angularfire2/firestore';
             ChatEffectsService
         ]),
         MaterialModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+
+        FormsModule
     ],
     declarations: [
         RoomsListComponent,
-        RoomItemComponent
+        RoomItemComponent,
+        CreateRoomDialogComponent
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
@@ -35,6 +39,10 @@ import { AngularFirestore } from 'angularfire2/firestore';
     providers: [
         RoomsService,
         AngularFirestore
+    ],
+
+    entryComponents: [
+        CreateRoomDialogComponent
     ]
 })
 export class ChatModule {

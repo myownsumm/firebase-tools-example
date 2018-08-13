@@ -5,6 +5,8 @@ import { FetchRoomsList } from '../../store/chat.actions';
 import { Observable } from 'rxjs';
 import { IRoom } from '../../../../../typings';
 import { selectAvailableRooms } from '../../store/chat.selectors';
+import { MatDialog } from '@angular/material';
+import { CreateRoomDialogComponent } from '../create-room/create-room-dialog.component';
 
 
 @Component({
@@ -15,7 +17,7 @@ import { selectAvailableRooms } from '../../store/chat.selectors';
 export class RoomsListComponent implements OnInit {
     protected availableRooms$: Observable<IRoom>;
 
-    constructor(protected store: Store<IChatState>) {
+    constructor(protected store: Store<IChatState>, protected dialog: MatDialog) {
         this.availableRooms$ = store.pipe(
             select(selectAvailableRooms)
         );
@@ -25,5 +27,15 @@ export class RoomsListComponent implements OnInit {
         this.store.dispatch(
             new FetchRoomsList()
         );
+    }
+
+    openDialog(): void {
+        const dialogRef = this.dialog.open(CreateRoomDialogComponent, {
+            width: '450px'
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed', result);
+        });
     }
 }

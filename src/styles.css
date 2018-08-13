@@ -24,3 +24,8 @@ body {
 .app-link:hover {
     text-decoration: underline;
 }
+
+.button-row button,
+.button-row a {
+    margin-right: 8px;
+}

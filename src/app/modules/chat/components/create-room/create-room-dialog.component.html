@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Create new Room</h2>
+<mat-dialog-content>
+    <mat-form-field>
+        <input matInput [(ngModel)]="name" placeholder="Enter the new Room name">
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-button [mat-dialog-close]="name">OK</button>
+</mat-dialog-actions>
