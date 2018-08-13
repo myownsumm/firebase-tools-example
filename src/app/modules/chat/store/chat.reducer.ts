@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+import { ROOMS_LIST_FETCHED } from './chat.actions';
 
 
 export interface IChatState {
@@ -13,6 +14,12 @@ export function chatReducer(state: IChatState = INITIAL_CHAT_STATE, action: any)
     let newState = _.cloneDeep(state);
 
     switch (action.type) {
+        case ROOMS_LIST_FETCHED: {
+            console.log(action.payload);
+
+            return newState;
+        }
+
         default:
             return newState;
     }

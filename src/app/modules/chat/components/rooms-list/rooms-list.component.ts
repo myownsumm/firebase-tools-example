@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { IChatState } from '../../store/chat.reducer';
+import { FetchRoomsList } from '../../store/chat.actions';
 
 
 @Component({
@@ -7,6 +10,13 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./rooms-list.component.scss']
 })
 export class RoomsListComponent implements OnInit {
+    constructor(protected store: Store<IChatState>) {
+
+    }
+
     ngOnInit() {
+        this.store.dispatch(
+            new FetchRoomsList()
+        );
     }
 }

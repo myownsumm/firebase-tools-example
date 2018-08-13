@@ -11,6 +11,7 @@ import { ChatEffectsService } from './store/chat.effects';
 import { chatReducer } from './store/chat.reducer';
 import { RoomItemComponent } from './components/room-item/room-item.component';
 import { RoomsService } from './services/rooms.service';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @NgModule({
     imports: [
@@ -32,7 +33,8 @@ import { RoomsService } from './services/rooms.service';
         CUSTOM_ELEMENTS_SCHEMA
     ],
     providers: [
-        RoomsService
+        RoomsService,
+        AngularFirestore
     ]
 })
 export class ChatModule {
