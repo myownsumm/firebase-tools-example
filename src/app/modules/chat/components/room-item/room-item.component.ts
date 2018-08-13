@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IRoom } from '../../../../../typings';
 
 
 @Component({
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./room-item.component.scss']
 })
 export class RoomItemComponent implements OnInit {
+    @Input() room: IRoom;
+
     ngOnInit() {
     }
 }

@@ -1,11 +1,6 @@
 <mat-list>
     <h3 mat-subheader>Rooms list</h3>
 
-    <app-chat-room-item></app-chat-room-item>
-
-    <mat-divider></mat-divider>
-
-    <app-chat-room-item></app-chat-room-item>
-
-    <mat-divider></mat-divider>
+    <app-chat-room-item [room]="availableRoom"
+                        *ngFor="let availableRoom of availableRooms$ | async"></app-chat-room-item>
 </mat-list>
